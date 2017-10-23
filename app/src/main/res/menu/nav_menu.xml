@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_mine"
+            android:icon="@drawable/mine_fill"
+            android:title="Mine" />
+
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/group_fill"
+            android:title="Group" />
+
+        <item
+            android:id="@+id/nav_financial"
+            android:icon="@drawable/financial_fill"
+            android:title="Financial" />
+
+        <item
+            android:id="@+id/nav_tasklist"
+            android:icon="@drawable/tasklist_fill"
+            android:title="Tasklist" />
+
+        <item
+            android:id="@+id/nav_setup"
+            android:icon="@drawable/setup_fill"
+            android:title="Setup" />
+
+
+    </group>
+</menu>

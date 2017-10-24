@@ -12,6 +12,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,11 +22,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.gentleman.materialdesign.Adapter.FruitAdapter;
+import com.example.gentleman.materialdesign.data.Fruit;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.widget.Toast.*;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+
+    private List<Fruit> mListFruit = new ArrayList<>();
+
+    private FruitAdapter fruitAdapter;
+
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +49,19 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        initFruit();
+        fruitAdapter = new FruitAdapter(mListFruit);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setAdapter(fruitAdapter);
+
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!=null){
+            //设置返回键可见
             actionBar.setDisplayHomeAsUpEnabled(true);
+            //设置返回键的图标
             //actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
         //设置默认选中项
@@ -66,19 +91,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    /**
-     * 导航栏点击事件
-     * @param item MenuItem
-     * @return
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
+    private void initFruit() {
+        for (int i = 0;i<50;i++){
+            Fruit one = new Fruit(String.valueOf(i),R.mipmap.ic_launcher);
+            mListFruit.add(one);
         }
-        return true;
     }
 
     /**
@@ -97,6 +114,21 @@ public class MainActivity extends AppCompatActivity {
         if (searchView!=null) {
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        }
+        return true;
+    }
+
+
+    /**
+     * 导航栏点击事件
+     * @param item MenuItem
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return true;
     }

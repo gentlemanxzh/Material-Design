@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFruit() {
         for (int i = 0;i<50;i++){
-            Fruit one = new Fruit(String.valueOf(i),R.mipmap.ic_launcher);
+            Fruit one = new Fruit(String.valueOf(i),R.drawable.background);
             mListFruit.add(one);
         }
     }
